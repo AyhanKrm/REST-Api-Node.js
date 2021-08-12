@@ -9,9 +9,14 @@ module.exports = function(app){
     app.route('/tampil')
         .get(jsonku.tampildatamahasiswa);    
         
-    app.route('/tampil/:id')
+    app.route('/tampil/:id_mahasiswa')
         .get(jsonku.tampilid);    
         
     app.route('/tambah')
         .post(jsonku.addMahasiswa);    
+        
+    app.route('/ubah')
+        .put(jsonku.updateMahasiswa);
+    
+        
 };

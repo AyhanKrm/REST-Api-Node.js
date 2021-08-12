@@ -20,8 +20,8 @@ exports.tampildatamahasiswa = function(req, res){
 
 //menampilkan semua data mahasiswa berdasarkan id
 exports.tampilid = function(req, res){
-    let id = req.params.id;
-    connection.query('SELECT * FROM mahasiswa WHERE id = ?', [id],
+    let id_mahasiswa = req.params.id_mahasiswa;
+    connection.query('SELECT * FROM mahasiswa WHERE id = ?', [id_mahasiswa],
         function(error, rows, fields){
             if(error){
                 console.log(error);
@@ -47,4 +47,22 @@ exports.addMahasiswa = function(req, res){
             response.ok('Berhasil Menambah Data Mahasiswa Baru!', res);
         }
     });
+};
+
+//mengupdate data mahasiswa berdasarkan id put
+exports.updateMahasiswa = function(req, res){
+    let id = req.body.id_mahasiswa;
+    let nim = req.body.nim;
+    let nama = req.body.nama;
+    let jurusan = req.body.jurusan;
+    
+    connection.query('UPDATE mahasiswa SET nim=?, nama=?, jurusan=? WHERE id_mahasiswa=?', [nim, nama, jurusan, id],
+        function(error, rows, fields){
+            if(error){
+                console.log(error);
+            }else{
+                response.ok('Berhasil Mengubah Data Mahasiswa!', res);
+            }
+        }    
+    );
 };
