@@ -21,7 +21,7 @@ exports.tampildatamahasiswa = function(req, res){
 //menampilkan semua data mahasiswa berdasarkan id
 exports.tampilid = function(req, res){
     let id_mahasiswa = req.params.id_mahasiswa;
-    connection.query('SELECT * FROM mahasiswa WHERE id = ?', [id_mahasiswa],
+    connection.query('SELECT * FROM mahasiswa WHERE id_mahasiswa = ?', [id_mahasiswa],
         function(error, rows, fields){
             if(error){
                 console.log(error);
@@ -64,5 +64,20 @@ exports.updateMahasiswa = function(req, res){
                 response.ok('Berhasil Mengubah Data Mahasiswa!', res);
             }
         }    
+    );
+};
+
+//menghapus data mahasiswa berdasarkan id put
+exports.hapusMahasiswa = function(req, res){
+    let id = req.body.id_mahasiswa;
+    
+    connection.query('DELETE FROM mahasiswa WHERE id_mahasiswa=?', [id],
+        function(error, rows, fields){
+            if(error){
+                console.log(error);
+            }else{
+                response.ok('Berhasil Menghapus Data Mahasiswa!', res);
+            }
+        } 
     );
 };
